@@ -1,0 +1,35 @@
+import matplotlib.pyplot as plt
+import matplotlib.animation as animation
+import pandas as pd
+import random
+
+# Função para atualizar os dados financeiros
+def atualizar_dados(i, y_data):
+    # Simula a geração de dados financeiros aleatórios (por exemplo, saldo de conta)
+    novo_dado = random.randint(1000, 5000)
+    y_data.append(novo_dado)
+    
+    # Mantém o número de dados no gráfico limitado (últimos 50 pontos)
+    if len(y_data) > 50:
+        y_data.pop(0)
+
+    # Atualiza o gráfico com os novos dados
+    line.set_ydata(y_data)
+    return line,
+
+# Dados iniciais
+y_data = [random.randint(1000, 5000) for _ in range(50)]
+
+# Configuração do gráfico
+fig, ax = plt.subplots()
+ax.set_ylim(0, 6000)
+line, = ax.plot(y_data)
+
+# Animação do gráfico
+ani = animation.FuncAnimation(fig, atualizar_dados, fargs=(y_data,), interval=1000)
+
+plt.title("Status Financeiro - Atualização em Tempo Real")
+plt.xlabel("Tempo")
+plt.ylabel("Valor (em R$)")
+
+plt.show()
